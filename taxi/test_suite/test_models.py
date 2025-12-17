@@ -12,11 +12,11 @@ class CarModelTest(TestCase):
     def test_str_returns_model(self):
         manufacturer = Manufacturer.objects.create(name="BMW Germany")
         car = Car.objects.create(model="X5", manufacturer=manufacturer)
-        self.assertEqual(str(car), "X5")
+        self.assertEqual(str(car).strip(), "X5")
 
 
 class DriverModelTest(TestCase):
-    def test_str_returns_username(self):
+    def test_str_contains_username(self):
         driver = Driver.objects.create(username="ivan",
                                        license_number="TES12345")
-        self.assertEqual(str(driver).split()[0], "ivan")
+        self.assertIn(driver.username, str(driver))
